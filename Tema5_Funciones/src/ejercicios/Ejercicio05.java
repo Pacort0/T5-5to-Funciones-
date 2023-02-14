@@ -16,7 +16,7 @@ public class Ejercicio05 {
 		int tabla[] = new int[tam];
 
 		for (int i = 0; i < tabla.length; i++) {
-			tabla[i] = (int) (Math.random() * 10);
+			tabla[i] = (int) (Math.random() * 5);
 		}
 		System.out.println(Arrays.toString(tabla));
 
@@ -27,14 +27,27 @@ public class Ejercicio05 {
 	public static int[] sinRepetidos(int tabla[]) {
 		int tablaSR[] = new int[0];
 		int cont = 0;
-		
-		do {
-			tablaSR = Arrays.copyOf(tablaSR, tablaSR.length+1);
-			tablaSR[tablaSR.length-1] = tabla[cont];
-			cont++;
-		}while(cont < tabla.length);
+
+		for (int i = 0; i < tabla.length; i++) {
+			if(!repetido(tabla, tablaSR, cont)) {
+				cont++;
+				tablaSR = Arrays.copyOf(tablaSR, tablaSR.length + 1);
+				tablaSR[tablaSR.length - 1] = tabla[i];
+			}
+		}
 
 		return tablaSR;
 	}
 
+	public static Boolean repetido(int tablaR[], int tablaSR[], int cont) {
+		Boolean repetido = false;
+
+		for (int i = 0; i < tablaSR.length; i++) {
+			if (tablaR[cont] == tablaSR[i]) {
+				repetido = true;
+				break;
+			}
+		}
+		return repetido;
+	}
 }
